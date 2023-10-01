@@ -1,20 +1,36 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 
-import { toast } from 'react-hot-toast';
-import Footer from './components/Footer';
+import RequireAuth from './components/Auth/RequireAuth';
+import Aboutus from './pages/Aboutus';
+import Contact from './pages/Contact';
+import CourseDescription from './pages/Course/CourseDescription';
+import CourseList from './pages/Course/CourseList';
+import CreateCourse from './pages/Course/CreateCourse';
+import Denied from './pages/Denied';
+import Home from './pages/Home';
+import Notfound from './pages/NotFound';
+import LogIn from './pages/LogIn';
+import Signup from './pages/Signup';
 
 const App = () => {
-  useEffect(() => {
-    toast.success('Welcome website');
-  }, []);
   return (
-    <div>
-      <h1>Hellow</h1>
-      <button class='inline-block cursor-pointer rounded-md bg-gray-800 px-4 py-3 text-center text-sm font-semibold uppercase text-white transition duration-200 ease-in-out hover:bg-gray-900'>
-        Button
-      </button>
-      <Footer/>
-    </div>
+    <Routes>
+      <Route path='/' element={<Home />} />
+      <Route path='/about' element={<Aboutus />} />
+      <Route path='/signup' element={<Signup />} />
+      <Route path='/login' element={<LogIn />} />
+      <Route path='/courses' element={<CourseList />} />
+      <Route path='/course/description' element={<CourseDescription />} />
+
+      <Route element={<RequireAuth allowedRoles={['ADMIN']} />}>
+        <Route path='/course/create' element={<CreateCourse />} />
+      </Route>
+
+      <Route path='/contact' element={<Contact />} />
+      <Route path='/denied' element={<Denied />} />
+      <Route path='*' element={<Notfound />} />
+    </Routes>
   );
 };
 
