@@ -1,21 +1,29 @@
-import React from 'react'
+import { BsFacebook, BsInstagram, BsLinkedin, BsTwitter } from 'react-icons/bs';
 
-const Footer = () => {
+function Footer() {
+  const newDate = new Date();
+  const year = newDate.getFullYear();
 
-  // create year data
-  const newData = new Date();
-  const year = newData.getFullYear();
   return (
-    <div>
-      <footer className='relative left-0 bottom-0 h-[10vh] py-5 flex flex-col sm:flex-row justify-between items-center bg-gray-800 text-white font-semibold text-sm'>
-        <section className='flex flex-col sm:flex-row items-center'>
-          Copyright {year} | All right reserved
-        </section>
-        <div className='flex flex-col sm:flex-row items-center'>
-        </div>
-      </footer>
-    </div>
-  )
+    <footer className='relative left-0 bottom-0 h-[10vh] py-5 flex flex-col sm:flex-row items-center justify-between sm:px-20 text-white bg-gray-800'>
+      <section className='text-lg'>Copyright {year} | All rights reserved</section>
+
+      <section className='flex items-center justify-center gap-5 text-2xl text-white'>
+        <a href='#' className='hover:text-yellow-500 transition-all ease-in-out duration-300'>
+          <BsFacebook />
+        </a>
+        <a href='#' className='hover:text-yellow-500 transition-all ease-in-out duration-300'>
+          <BsInstagram />
+        </a>
+        <a href='#' className='hover:text-yellow-500 transition-all ease-in-out duration-300'>
+          <BsLinkedin />
+        </a>
+        <a href='#' className='hover:text-yellow-500 transition-all ease-in-out duration-300'>
+          <BsTwitter />
+        </a>
+      </section>
+    </footer>
+  );
 }
 
-export default Footer
+export default Footer;
