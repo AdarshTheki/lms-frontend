@@ -5,13 +5,13 @@
 1. Clone the Project
 
 ```
-  git clone clone.link.git
+  git clone https://github.com/AdarshTheki/lms-frontend.git
 ```
 
 2. Move to the directory
 
 ```
-  cd directory Name/
+  cd lms-frontend/
 ```
 
 3. Install dependencies
@@ -103,5 +103,5 @@
 ```
 2. Use in Html file
 ```
-  <html data-theme="cupcake"></html>
+  <html data-theme="dark"></html>
 ```
