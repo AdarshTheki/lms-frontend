@@ -92,16 +92,20 @@
     "source.fixAll.eslint": true
   }
 ```
+
 ### Add daisyUI as a Tailwind CSS plugin
 
 1. Add daisyUI to your `tailwind.config.js` files:
+
 ```
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["light", "dark", "cupcake"],
+    themes: ["light", "dark", "night"],
   },
 ```
-2. Use in Html file
+
+2. Use in `index.html` file Add Attributes to data-theme in html tag:
+
 ```
   <html data-theme="dark"></html>
 ```

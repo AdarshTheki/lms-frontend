@@ -3,17 +3,23 @@ import toast from 'react-hot-toast';
 
 import axiosInstance from '../config/axiosInstance';
 
+const initialState = {
+  isLoggedIn: localStorage.getItem('isLoggedIn') || false,
+  role: localStorage.getItem('role') || '',
+  data: localStorage.getItem('data') || {},
+};
+
 export const createAccount = createAsyncThunk('/auth/signup', async (data) => {
   try {
-    const response = await axiosInstance.post('/auth/signup', data);
-    toast.promise(res, {
+    const response = await axiosInstance.post('/user/register', data);
+    toast.promise(response, {
       loading: 'Wait! creating your account',
       success: (data) => {
         return data?.data?.message;
       },
       error: 'Failed to create your account',
     });
-    return await response;
+    return response?.data;
   } catch (error) {
     console.log(error);
     toast.error(error?.response?.data?.message);
@@ -54,13 +60,6 @@ export const logout = createAsyncThunk('/auth/logout', async () => {
   }
 });
 
-
-const initialState = {
-  isLoggedIn: localStorage.getItem('isLoggedIn') || false,
-  role: localStorage.getItem('role') || '',
-  data: localStorage.getItem('data') || {},
-};
-
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -68,12 +67,12 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(login.fulfilled, (state, action) => {
+        localStorage.setItem('data', JSON.stringify(action?.payload?.data));
         localStorage.setItem('isLoggedIn', true);
-        localStorage.setItem('role', action.payload?.data?.user?.role);
-        localStorage.setItem('data', JSON.stringify(action.payload?.data));
+        localStorage.setItem('role', 'ADMIN');
         state.isLoggedIn = true;
-        state.role = action.payload?.data?.user?.role;
-        state.data = action.payload?.data?.user;
+        state.role = action?.payload?.data?.user?.role;
+        state.data = action?.payload?.data?.user;
       })
       .addCase(logout.fulfilled, (state) => {
         localStorage.clear();
@@ -81,6 +80,7 @@ const authSlice = createSlice({
         state.role = '';
         state.data = {};
       });
-  }
+  },
 });
+
 export default authSlice.reducer;
