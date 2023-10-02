@@ -1,16 +1,13 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import CourseCard from '../../components/CourseCard';
-import HomeLayout from '../../layouts/HomeLayout';
-import { getAllCourses } from '../../redux/courseSlice';
+import CourseCard from '../components/CourseCard';
+import HomeLayout from '../layouts/HomeLayout';
+import { getAllCourses } from '../redux/courseSlice';
 
-function CourseList() {
+const CourseList = () => {
   const dispatch = useDispatch();
-
   const { courseList } = useSelector((state) => state?.course);
-
-  // console.log(courseList);
 
   async function loadCourses() {
     await dispatch(getAllCourses());

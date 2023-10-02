@@ -1,15 +1,15 @@
-import React from 'react'
+import React from 'react';
 import HomeLayout from '../layouts/HomeLayout';
-import about from '../assets/about.svg'
-import apj from '../assets/apj.png'
-import billGates from '../assets/billGates.png'
+import about from '../assets/about.svg';
+import apj from '../assets/apj.png';
+import billGates from '../assets/billGates.png';
 import nelsonMandela from '../assets/nelsonMandela.png';
 import steveJobs from '../assets/steveJobs.png';
 
-export default function About() {
+const About = () => {
   return (
     <HomeLayout>
-      <div className='flex flex-col mx-auto text-white sm:px-10 pt-20'>
+      <div className='flex flex-col mx-auto text-white sm:px-10 py-20'>
         <div className='md:flex-row flex flex-col justify-center items-center gap-5 mx-10'>
           <section className='md:w-1/2 space-y-10'>
             <h1 className='text-5xl text-yellow-500 font-semibold'>
@@ -101,4 +101,6 @@ export default function About() {
       </div>
     </HomeLayout>
   );
-}
+};
+
+export default About;

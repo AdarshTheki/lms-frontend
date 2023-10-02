@@ -56,7 +56,7 @@ function Login() {
           className='flex flex-col justify-center gap-3 rounded-lg p-4 text-white w-35'>
           <h1 className='text-2xl text-center font-bold'>Login Page</h1>
           <div className='relative'>
-                <BsPersonCircle className='w-24 h-24 rounded-full m-auto relative' />
+            <BsPersonCircle className='w-24 h-24 rounded-full m-auto relative' />
           </div>
           <div className='flex flex-col gap-1'>
             <label htmlFor='email' className='font-semibold'>
@@ -89,14 +89,14 @@ function Login() {
             />
           </div>
           <button className='mt-2 bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 cursor-pointer py-2 font-semibold text-lg'>
-            Sign In
+            Login
           </button>
           <p className='text-center'>
-            Do not have an account ?{' '}
+            You don't have an account ?{' '}
             <Link
               to='/signup'
               className='cusror-pointer hover:text-blue-500 text-xl font-semibold uppercase text-accent'>
-              Login
+              Register
             </Link>
           </p>
         </form>

@@ -8,11 +8,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import HomeLayout from '../layouts/HomeLayout';
 import { createAccount } from '../redux/authSlice';
 
-function Signup() {
+function SignUp() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [signupDetails, setSignupDetails] = useState({
+  const [signUpDetails, setSignUpDetails] = useState({
     email: '',
     fullName: '',
     password: '',
@@ -23,8 +23,8 @@ function Signup() {
 
   function handleUserInput(e) {
     const { name, value } = e.target;
-    setSignupDetails({
-      ...signupDetails,
+    setSignUpDetails({
+      ...signUpDetails,
       [name]: value,
     });
   }
@@ -33,8 +33,8 @@ function Signup() {
     e.preventDefault();
     const uploadedImage = e.target.files[0];
     if (!uploadedImage) return;
-    setSignupDetails({
-      ...signupDetails,
+    setSignUpDetails({
+      ...signUpDetails,
       avatar: uploadedImage,
     });
     const fileReader = new FileReader();
@@ -46,44 +46,38 @@ function Signup() {
 
   async function onFormSubmit(e) {
     e.preventDefault();
-    console.log(signupDetails);
-    if (!signupDetails.email || !signupDetails.password || !signupDetails.fullName) {
+    // console.log(signUpDetails);
+    if (!signUpDetails.email || !signUpDetails.password || !signUpDetails.fullName) {
       toast.error('Please fill all the details');
       return;
     }
-    if (signupDetails.fullName.length < 5) {
-      toast.error('Name should be atleast of 5 characters');
+    if (signUpDetails.fullName.length < 5) {
+      toast.error('Name should be at least of 5 characters');
       return;
     }
-    // if (!isEmail(signupDetails.email)) {
+    // if (!isEmail(signUpDetails.email)) {
     //   toast.error('Invalid email provided');
     //   return;
     // }
-    // if (!isValidPassword(signupDetails.password)) {
+    // if (!isValidPassword(signUpDetails.password)) {
     //   toast.error(
     //     'Invalid password provided, password should 6-16 character long with atleast a number and a special character'
     //   );
     //   return;
     // }
 
-    const formData = new FormData();
-    formData.append('fullName', signupDetails.fullName);
-    formData.append('email', signupDetails.email);
-    formData.append('password', signupDetails.password);
-    formData.append('avatar', signupDetails.avatar);
+    const response = await dispatch(createAccount(signUpDetails));
 
-    const response = await dispatch(createAccount(formData));
-    console.log(response);
     if (response?.payload?.data) {
+      setSignUpDetails({
+        email: '',
+        fullName: '',
+        password: '',
+        avatar: '',
+      });
+      setPreviewImage('');
       navigate('/');
     }
-    setSignupDetails({
-      email: '',
-      fullName: '',
-      password: '',
-      avatar: '',
-    });
-    setPreviewImage('');
   }
 
   return (
@@ -118,7 +112,7 @@ function Signup() {
             </label>
             <input
               onChange={handleUserInput}
-              value={signupDetails.fullName}
+              value={signUpDetails.fullName}
               required
               type='text'
               name='fullName'
@@ -133,7 +127,7 @@ function Signup() {
             </label>
             <input
               onChange={handleUserInput}
-              value={signupDetails.email}
+              value={signUpDetails.email}
               required
               type='text'
               name='email'
@@ -149,7 +143,7 @@ function Signup() {
             <input
               required
               onChange={handleUserInput}
-              value={signupDetails.password}
+              value={signUpDetails.password}
               type='password'
               name='password'
               className='bg-transparent px-2 py-1 border'
@@ -162,7 +156,9 @@ function Signup() {
           </button>
           <p className='text-center'>
             Already have an account ?{' '}
-            <Link to='/login' className='cusror-pointer hover:text-blue-500 text-xl font-semibold uppercase text-accent'>
+            <Link
+              to='/login'
+              className='cusror-pointer hover:text-blue-500 text-xl font-semibold uppercase text-accent'>
               Login
             </Link>
           </p>
@@ -172,4 +168,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default SignUp;

@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import HomeLayout from '../../layouts/HomeLayout';
 import { createNewCourse } from '../../redux/courseSlice';
 
-function CreateCourse() {
+const CreateCourse = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

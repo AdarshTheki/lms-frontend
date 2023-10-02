@@ -6,7 +6,7 @@ import home from '../assets/home.svg';
 export default function Home() {
   return (
     <HomeLayout>
-      <div className='pt-10 text-white md:flex-row flex flex-col items-center justify-center gap-10 mx-16 h-[90vh]'>
+      <div className='py-20 relative text-white md:flex-row flex flex-col items-center justify-center gap-10 mx-16 min-h-[90vh]'>
         <div className='md:w-1/2 space-y-6'>
           <h1 className='text-5xl font-semibold'>
             Find out best <span className='text-yellow-500 font-bold'>Online courses</span>
